@@ -9,8 +9,8 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px;
-    color: #123207;
-    background: #123207;
+    color: #1f6920;
+    background: #1f6920;
 }
 
 hr {
@@ -73,7 +73,7 @@ h3 {
     place-content: center;
     place-items: center;
     width: fit-content;
-    border-radius: 10px;
+    border-radius: 5px;
     letter-spacing: 0.05em;
     border: 1px solid #42b983;
     text-decoration: none;
