@@ -1,13 +1,11 @@
 <template>
-  <div class="container">
-    <router-view></router-view>
-  </div>
+  <h1>Help</h1>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'AuthLayout'
+  name: 'Help'
 });
 </script>

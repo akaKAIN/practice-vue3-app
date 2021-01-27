@@ -1,5 +1,5 @@
 <template>
-  <component v-bind:is="layout + '-layout'"></component>
+  <component :is="layout + '-layout'" v-if="layout"></component>
 </template>
 
 <script lang="ts">

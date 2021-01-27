@@ -1,8 +1,9 @@
 <template>
   <the-navbar></the-navbar>
   <div class="container with-nav">
-    <div class="card"></div></div
-></template>
+    <router-view></router-view>
+  </div>
+</template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';

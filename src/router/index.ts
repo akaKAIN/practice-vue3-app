@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-
 import MainLayout from '@/layout/MainLayout.vue';
-import AuthLayout from '@/layout/AuthLayout.vue';
+import {useStore} from "vuex";
+
+const store = useStore()
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -9,7 +10,8 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Main',
     component: MainLayout,
     meta: {
-      layout: 'main'
+      layout: 'main',
+      auth: true
     }
   },
   {
@@ -17,7 +19,8 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Help',
     component: () => import('@/views/Help.vue'),
     meta: {
-      layout: 'main'
+      layout: 'main',
+      auth: true
     }
   },
   {
@@ -36,8 +39,11 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  console.log('to: ', to, 'from: ', from);
-  next();
+  if (to.meta.auth && store.getters.token) {
+    next();
+  } else {
+
+  }
 });
 
 export default router;
