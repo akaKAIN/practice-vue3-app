@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import MainLayout from '@/layout/MainLayout.vue';
-import {useStore} from "vuex";
-
-const store = useStore()
+import store from '@/store';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -28,7 +26,8 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Auth',
     component: () => import('@/views/Auth.vue'),
     meta: {
-      layout: 'auth'
+      layout: 'auth',
+      auth: false
     }
   }
 ];
@@ -39,10 +38,14 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.auth && store.getters.token) {
+  const requireAuth = to.meta.auth;
+  console.log('store.getters.token', store.getters.token);
+  if (requireAuth && store.getters.isAuthenticated) {
     next();
+  } else if (requireAuth && !store.getters.isAuthenticated) {
+    next('/auth?message=auth');
   } else {
-
+    next();
   }
 });
 

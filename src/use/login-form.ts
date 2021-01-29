@@ -1,7 +1,8 @@
 import { useField, useForm } from 'vee-validate';
 import * as yup from 'yup';
 import { computed } from 'vue';
-import {useStore} from "vuex";
+import { useStore } from 'vuex';
+import router from '@/router';
 
 export function useLoginForm() {
   const { handleSubmit, isSubmitting, submitCount } = useForm();
@@ -34,9 +35,11 @@ export function useLoginForm() {
 
   const store = useStore();
 
-  const onSubmit = handleSubmit(
-    async values => await store.dispatch('auth/login', values)
-  );
+  const onSubmit = handleSubmit(async values => {
+    console.log(values);
+    await store.dispatch('auth/login', values);
+    await router.push('/');
+  });
   const toManyAttempts = computed((): boolean => submitCount.value >= 5);
 
   return {
