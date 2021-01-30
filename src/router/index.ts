@@ -1,4 +1,10 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import {
+  createRouter,
+  createWebHistory,
+  Router,
+  RouteRecordRaw,
+  RouterHistory,
+} from 'vue-router';
 import MainLayout from '@/layout/MainLayout.vue';
 import store from '@/store';
 
@@ -8,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Main',
     component: MainLayout,
     meta: {
-      layout: 'main',
+      layoutName: 'main',
       auth: true
     }
   },
@@ -17,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Help',
     component: () => import('@/views/Help.vue'),
     meta: {
-      layout: 'main',
+      layoutName: 'main',
       auth: true
     }
   },
@@ -26,23 +32,25 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Auth',
     component: () => import('@/views/Auth.vue'),
     meta: {
-      layout: 'auth',
+      layoutName: 'auth',
       auth: false
     }
   }
 ];
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+const history: RouterHistory = createWebHistory(process.env.BASE_URL);
+
+const router: Router = createRouter({
+  history,
   routes
 });
 
 router.beforeEach((to, from, next) => {
-  const requireAuth = to.meta.auth;
-  console.log('store.getters.token', store.getters.token);
-  if (requireAuth && store.getters.isAuthenticated) {
+  const requireAuth: boolean = to.meta.auth;
+  console.log('store.getters[auth/token]', store.getters['auth/token'], store.getters['auth/isAuthenticated']);
+  if (requireAuth && store.getters['auth/isAuthenticated']) {
     next();
-  } else if (requireAuth && !store.getters.isAuthenticated) {
+  } else if (requireAuth && !store.getters['auth/isAuthenticated']) {
     next('/auth?message=auth');
   } else {
     next();

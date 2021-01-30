@@ -12,7 +12,7 @@ export default defineComponent({
   components: { MainLayout, AuthLayout },
   setup() {
     const route = useRoute();
-    const layout = computed(() => route.meta.layout);
+    const layout = computed<string>(() => route.meta.layoutName);
     return { layout };
   }
 });
