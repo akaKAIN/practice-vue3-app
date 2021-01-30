@@ -1,5 +1,7 @@
+import {MessageObject} from "@/utils/error";
+
 export interface RootState {
-  message: string | null;
+  message: MessageObject | null;
 }
 
 export interface AuthState {

@@ -5,7 +5,7 @@ import { LoginInfo } from '@/models/base';
 import { error } from '@/utils/error';
 
 export const actions: ActionTree<AuthState, RootState> = {
-  async login({ commit }, payload: LoginInfo) {
+  async login({ commit, dispatch }, payload: LoginInfo) {
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_KEY}`;
     try {
       const response = await axios.post(url, {
@@ -15,7 +15,8 @@ export const actions: ActionTree<AuthState, RootState> = {
       const token: string = response.data.idToken;
       commit('setToken', token);
     } catch (err) {
-      console.log(error(err));
+      // Сохраняем сообщение об ошибке для показа
+      dispatch('setMessage', error(err, "danger"), { root: true });
     }
   }
 };

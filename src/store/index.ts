@@ -1,6 +1,7 @@
 import { createStore, createLogger } from 'vuex';
 import { auth } from '@/store/modules/auth';
 import { RootState } from '@/models/state';
+import {MessageObject} from "@/utils/error";
 
 const plugins = [];
 
@@ -9,12 +10,17 @@ if (process.env.NODE_ENV == 'development') {
 }
 export default createStore<RootState>({
   plugins,
-  state() {
-    return {
-      message: null
-    };
+  state: { message: null},
+  getters: { message: state => state.message },
+  mutations: {
+    setMessage: (state, message: MessageObject) => {
+      state.message = message;
+      // setTimeout(() => (state.message = null), 5000);
+    }
   },
-  mutations: {},
-  actions: {},
+  actions: {
+    setMessage: () => ({ commit }: any, message: MessageObject) =>
+      commit('setMessage', message)
+  },
   modules: { auth }
 });

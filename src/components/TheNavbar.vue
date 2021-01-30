@@ -3,10 +3,10 @@
     <h3>Testing app</h3>
     <ul class="navbar-menu">
       <li>
-        <router-link to="/">Router#1</router-link>
+        <router-link :to="{ name: 'Main' }">Home</router-link>
       </li>
       <li>
-        <router-link to="/">Router#2</router-link>
+        <router-link :to="{ name: 'Help' }">Help</router-link>
       </li>
       <li><a href="#">Messages</a></li>
       <li><a @click.prevent="logout">Exit</a></li>
