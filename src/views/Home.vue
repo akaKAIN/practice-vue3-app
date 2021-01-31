@@ -7,11 +7,9 @@
     <request-table :list="[1, 2, 3]"></request-table>
 
     <teleport to="body">
-      <app-modal
-        v-if="modal"
-        title="Modal title"
-        @close="closeModal"
-      ></app-modal>
+      <app-modal v-if="modal" title="Create new expense" @close="closeModal">
+        <request-modal></request-modal>
+      </app-modal>
     </teleport>
   </app-page>
 </template>
@@ -21,10 +19,11 @@ import { defineComponent, ref } from 'vue';
 import AppPage from '@/components/ui/AppPage.vue';
 import RequestTable from '@/components/RequestTable.vue';
 import AppModal from '@/components/ui/AppModal.vue';
+import RequestModal from '@/components/RequestModal.vue';
 
 export default defineComponent({
   name: 'Home',
-  components: { AppModal, RequestTable, AppPage },
+  components: { RequestModal, AppModal, RequestTable, AppPage },
   setup() {
     const modal = ref<boolean>(false);
     const activateModal = () => (modal.value = true);
