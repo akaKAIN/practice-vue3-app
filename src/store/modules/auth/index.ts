@@ -7,8 +7,7 @@ import { state } from '@/store/modules/auth/state';
 
 export const JWT_TOKEN = 'jwt-token';
 
-const namespaced = true;
-
+const namespaced: boolean = true;
 export const auth: Module<AuthState, RootState> = {
   namespaced,
   state,

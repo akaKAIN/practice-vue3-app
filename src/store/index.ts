@@ -2,6 +2,7 @@ import { createStore, createLogger, ActionContext } from 'vuex';
 import { auth } from '@/store/modules/auth';
 import { AuthState, RootState } from '@/models/state';
 import { MessageObject } from '@/utils/error';
+import { request } from '@/store/modules/request';
 
 type commit = ActionContext<AuthState, RootState>;
 
@@ -26,5 +27,5 @@ export default createStore<RootState>({
     },
     clearMessage: ({ commit }) => commit('clearMessage')
   },
-  modules: { auth }
+  modules: { auth, request }
 });
