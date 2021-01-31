@@ -1,25 +1,25 @@
-type ErrorMessageCode = 'EMAIL_NOT_FOUND' | 'INVALID_PASSWORD';
-type MessageType = 'danger' | 'warning' | 'primary'
+import { LocationQueryValue } from 'vue-router';
+
+type ErrorMessageCode = 'EMAIL_NOT_FOUND' | 'INVALID_PASSWORD' | 'auth';
+type MessageType = 'danger' | 'warning' | 'primary';
 
 export interface MessageObject {
   message: string;
   messageType: MessageType;
 }
 
-const response = {
-  response: { data: { error: { message: '' } } }
-};
-
-type FirebaseLoginResponseError = typeof response;
-
 enum ErrorType {
   EMAIL_NOT_FOUND = 'User with such email was not found',
-  INVALID_PASSWORD = 'Your password is invalid.'
+  INVALID_PASSWORD = 'Your password is invalid.',
+  auth = 'Authorization required'
 }
 
-export const error = (err: FirebaseLoginResponseError, messageType: MessageType) => {
-  const message =  ErrorType[err.response.data.error.message as ErrorMessageCode]
-    ? ErrorType[err.response.data.error.message as ErrorMessageCode]
+export const error = (
+  err: string | LocationQueryValue[],
+  messageType: MessageType
+) => {
+  const message = ErrorType[err as ErrorMessageCode]
+    ? ErrorType[err as ErrorMessageCode]
     : "Unknown error, let's panic";
-  return { message, messageType }
+  return { message, messageType };
 };

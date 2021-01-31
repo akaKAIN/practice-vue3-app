@@ -20,7 +20,10 @@
     </div>
 
     <button class="btn primary" :disabled="isSubmitting || toManyAttempts">
-      Push
+      Login
+    </button>
+    <button class="btn primary" :disabled="isSubmitting || toManyAttempts">
+      SignUp
     </button>
     <p class="text-danger" v-if="toManyAttempts">To many form submit</p>
   </form>
@@ -29,11 +32,22 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useLoginForm } from '@/use/login-form';
+import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
+import { error } from '@/utils/error';
 
 export default defineComponent({
   name: 'Auth',
   setup() {
-    return { ...useLoginForm() };
+    const route = useRoute();
+    const store = useStore();
+
+    if (route.query.message) {
+      store.dispatch('setMessage', error(route.query.message, 'warning'));
+    }
+    return {
+      ...useLoginForm()
+    };
   }
 });
 </script>

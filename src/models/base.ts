@@ -3,3 +3,9 @@ export interface LoginInfo {
   password: string;
   returnSecureToken: boolean;
 }
+
+export interface SelectOption {
+  id: number;
+  name: string;
+  value: string;
+}

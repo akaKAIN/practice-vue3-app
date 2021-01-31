@@ -39,6 +39,10 @@ export function useLoginForm() {
     await store.dispatch('auth/login', values);
     await router.push('/');
   });
+
+  const onSignUp = handleSubmit(async values => {
+    console.log(values, 'for signUp');
+  });
   const toManyAttempts = computed((): boolean => submitCount.value >= 5);
 
   return {
@@ -50,6 +54,7 @@ export function useLoginForm() {
     passwordBlur,
     isSubmitting,
     onSubmit,
-    toManyAttempts
+    toManyAttempts,
+    onSignUp
   };
 }

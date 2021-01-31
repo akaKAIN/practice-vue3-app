@@ -14,9 +14,12 @@ export const actions: ActionTree<AuthState, RootState> = {
       });
       const token: string = response.data.idToken;
       commit('setToken', token);
+      commit('clearMessage', null, { root: true });
     } catch (err) {
       // Сохраняем сообщение об ошибке для показа
-      dispatch('setMessage', error(err, "danger"), { root: true });
+      dispatch('setMessage', error(err.response.data.error.message, 'danger'), {
+        root: true
+      });
     }
   }
 };

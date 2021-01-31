@@ -1,4 +1,4 @@
-import {MessageObject} from "@/utils/error";
+import { MessageObject } from '@/utils/error';
 
 export interface RootState {
   message: MessageObject | null;

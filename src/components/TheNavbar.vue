@@ -3,7 +3,7 @@
     <h3>Testing app</h3>
     <ul class="navbar-menu">
       <li>
-        <router-link :to="{ name: 'Main' }">Home</router-link>
+        <router-link :to="{ name: 'Home' }">Home</router-link>
       </li>
       <li>
         <router-link :to="{ name: 'Help' }">Help</router-link>
